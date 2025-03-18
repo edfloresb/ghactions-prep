@@ -11,9 +11,10 @@ jobs:
               with:
                 node-version: 20
             - name: Setup Dependencies
+              working-directory: 04-using-actions/react-app
               run: |
-                cd 04-using-actions/react-app
                 npx ci
             - name: Run Unit Test
+              working-directory: 04-using-actions/react-app
               run:  |
-                npm run test --prefix 04-using-actions/react-app -- --ci
+                npm run test -- --ci
