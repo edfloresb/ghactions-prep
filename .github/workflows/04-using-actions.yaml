@@ -12,4 +12,5 @@ jobs:
                 node-version: 20
             - name: Setup Dependencies
               run: |
-                npm ci -w 04-using-actions/react-app
+                cd 04-using-actions/react-app
+                npx ci
