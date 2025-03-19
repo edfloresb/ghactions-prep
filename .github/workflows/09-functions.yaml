@@ -18,7 +18,7 @@ jobs:
               if: ${{failure()}}
               run: |
                 echo I will print if any previous step fails.
-            - name: I will execute 
+            - name: I will execute 2 
               if: ${{!cancelled()}}
               run: |
                 echo I will exec unless the workflow is cancelled
