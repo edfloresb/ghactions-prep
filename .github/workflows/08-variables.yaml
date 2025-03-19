@@ -35,13 +35,13 @@ jobs:
         steps:
             - name: Print Variable
               run: |
-                echo "Repo Var: ${{env.REPOSITORY_VAR}}"
+                echo "Repo Var: ${{vars.REPOSITORY_VAR}}"
     echo-pro:
         runs-on: ubuntu-latest
         environment: prod 
         steps:
             - name: Print Prod Vars
               run: |
-                echo Repo var: ${{env.REPOSITORY_VAR}}
+                echo Repo var: ${{vars.REPOSITORY_VAR}}
                 echo Env var: ${{vars.TARGET_VAR}}
                 
