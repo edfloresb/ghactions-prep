@@ -7,9 +7,15 @@ on:
                 type: boolean
                 default: false
 run-name: My custom workflow run name - ${{ inputs.debug }}
+env:
+    MY_WORKFLOW_VAR: ${{github.workflow}}
+    MY_OVERWRITTEN_VAR: workflow
 jobs:
     echo-data:
         runs-on: ubuntu-latest
+        env:
+            MY_JOB_VAR: job
+            MY_OVERWRITTEN_VAR: job
         steps:
             - name: Display Information
               run: |
@@ -23,3 +29,15 @@ jobs:
             - name: Print Variable
               run: |
                 echo "Variable: ${{vars.MY_VAR}}"
+            - name: Print EnvVars
+              env:
+                MY_OVERWRITTEN_VAR: step
+              run: |
+                echo "Workflow env: ${{vars.MY_WORKFLOW_VAR}}"
+                echo "Overwritten env:  ${{vars.MY_OVERWRITTEN_VAR}}"
+            - name: Print EnvVars 2
+              env:
+                MY_OVERWRITTEN_VAR: step
+              run: |
+                echo "Workflow env: ${{vars.MY_WORKFLOW_VAR}}"
+                echo "Overwritten env:  ${{vars.MY_OVERWRITTEN_VAR}}"
