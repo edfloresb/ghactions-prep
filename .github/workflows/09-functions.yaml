@@ -12,12 +12,13 @@ jobs:
             - name: Print PR Labels
               run: echo ${{toJson(github.event.pull_request.labels)}}
             - name: Bug step
-              if: ${{success() && contains(github.event.pull_request.title,'fix')}}
+              if: ${{!cancelled() && contains(github.event.pull_request.title,'fix')}}
               run: echo I am a bug fix
             - name: Failing Step
               run: |
                 exit 123
             - name: I will be skipped
+              if: ${{success()}}
               run: |
                 echo I will exec if the step before successed
             - name: I will execute
