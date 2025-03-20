@@ -14,8 +14,6 @@ jobs:
             - name: Bug step
               if: ${{success() && contains(github.event.pull_request,'fix')}}
               run: echo I am a bug fix
-            - name: Sleep
-              run: sleep 20
             - name: Failing Step
               run: |
                 exit 123
