@@ -3,11 +3,17 @@ name: 09 Using Functions
 on:
     pull_request:
     workflow_dispatch:
-    push:
 jobs:
     echo:
         runs-on: ubuntu-latest
         steps:
+            - name: Print PR title
+              run: echo "${{github.event.pull_request}}"
+            - name: Print PR Labels
+              run: echo ${{toJson(github.event.pull_request.labels)}}
+            - name: Bug step
+              if: ${{success() && contains(github.event.pull_request,'fix')}}
+              run: echo I am a bug fix
             - name: Sleep
               run: sleep 20
             - name: Failing Step
