@@ -33,8 +33,10 @@ jobs:
                 key: deps-node-modules-${{ hashFiles('04-using-actions/react-app/package-lock.json') }}
                 path: 04-using-actions/react-app/node_modules
             - name: Testing
+              working-directory: 04-using-actions/react-app
               run: npm run test
             - name: Build
+              working-directory: 04-using-actions/react-app
               run: npm run build
             - name: Deploy
               run: echo Deploying in nonprod
