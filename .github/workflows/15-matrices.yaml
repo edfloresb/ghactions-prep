@@ -12,7 +12,7 @@ jobs:
         name: ${{matrix.os}}-${{matrix.node}}
         runs-on: ubuntu-latest
         strategy:
-            fail-fast: ${{inputs.fails- }}
+            fail-fast: ${{inputs.fails-fast }}
             matrix:
                 node: ['18.x','21.x']
                 os:
