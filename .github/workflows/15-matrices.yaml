@@ -61,7 +61,8 @@ jobs:
                       opacity: 100
                     - opacity: 50
                 exclude:
-                    - opacity: 75
+                    - color: green
+                    - shape: circle
         steps:
             - name: Just Print
               run: echo Values ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}
