@@ -2,21 +2,66 @@ name: 15 - Working with Matices
 
 on:
     workflow_dispatch:
+        inputs: 
+            fails-fast:
+                type: boolean
+                default: false
 
 jobs:
     backwards-compatibility:
         name: ${{matrix.os}}-${{matrix.node}}
         runs-on: ubuntu-latest
         strategy:
+            fail-fast: ${{inputs.fails-fast }}
             matrix:
                 node: ['18.x','21.x']
                 os:
                     - ubuntu-latest
                     - windows-latest
+                include:
+                    - os: ubuntu-latest
+                      node: '16.x'
+                    - os: ubuntu-latest
+                      node: '21.x'
+                      tag: experimental
         steps:
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
                 node-version: ${{matrix.node}}
             - name: Performe some test
-              run: echo Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.os}}
+              run: |
+                echo Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node}}
+            - name: Upload Test Results
+              run: echo Uploading Test 
+    include-example:
+        runs-on: ubuntu-latest
+        name: ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}
+        strategy:
+            matrix:
+                color:
+                    - red
+                    - green
+                shape:
+                    - circle
+                    - square
+                size:
+                    - small
+                    - large
+                include:
+                    - color: red
+                      shape: triangle
+                    - color: red
+                      opacity: 75
+                    - shape: circle
+                      opacity: 100
+                    - opacity: 50
+                    - color: green
+                      shape: circle
+                      size: medium
+                exclude:
+                    - color: green
+                    - shape: circle
+        steps:
+            - name: Just Print
+              run: echo Values ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}
