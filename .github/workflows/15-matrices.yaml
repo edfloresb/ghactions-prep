@@ -2,13 +2,17 @@ name: 15 - Working with Matices
 
 on:
     workflow_dispatch:
+        inputs: 
+            fails-fast:
+                type: boolean
+                default: false
 
 jobs:
     backwards-compatibility:
         name: ${{matrix.os}}-${{matrix.node}}
         runs-on: ubuntu-latest
         strategy:
-            fail-fast: true
+            fail-fast: ${{inputs.fails-fast}}
             matrix:
                 node: ['18.x','21.x']
                 os:
@@ -26,7 +30,7 @@ jobs:
               with:
                 node-version: ${{matrix.node}}
             - name: Fail if experimental
-              if: ${{matrix.tag == 'experimentals'}}
+              if: ${{matrix.tag == 'experimental'}}
               run: exit 1
             - name: Performe some test
               run: |
