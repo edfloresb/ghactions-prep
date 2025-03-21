@@ -1,0 +1,18 @@
+name: 16 Working with environments
+run-name: 16 Working with environments Env - ${{inputs.target_env}}
+on:
+    workflow_dispatch:
+        inputs:
+            target_env:
+                type: environment
+                default: staging
+jobs:
+    echo:
+        runs-on: ubuntu-latest
+        environment: ${{inputs.target_env}}
+        env: 
+            var-b: ${{vars.MY_ENV_VALUE||'NOT FOUND'}}
+        steps:
+            - name: Just For Fun
+              run: echo Printing the var ${{env.var-b}}
+    
